@@ -9,10 +9,11 @@ class AStar(Searcher):
         self.__heuristic = Heuristic
 
     def search(self, initialState):
-        self.__frontier.put((self.__heuristic.heuristic_cost(initialState)+initialState.previous_cost,initialState))
+        stateExplored=1
+        self.__frontier.put((self.__heuristic.heuristic_cost(initialState)+initialState.previous_cost,stateExplored,initialState))
 
         while not self.__frontier.empty():
-            state = self.__frontier.get()[1]
+            state = self.__frontier.get()[2]
 
             if super().goal_test(state):
                 return state
@@ -21,7 +22,8 @@ class AStar(Searcher):
                 grid_hash = neighbor.get_hash()
                 if grid_hash not in self.__visited:
                     self.__visited.add(grid_hash)
-                    self.__frontier.put((self.__heuristic.heuristic_cost(neighbor)+neighbor.previous_cost,neighbor))
+                    stateExplored+=1
+                    self.__frontier.put((self.__heuristic.heuristic_cost(neighbor)+neighbor.previous_cost,stateExplored,neighbor))
                 else:
                     pass
         return None

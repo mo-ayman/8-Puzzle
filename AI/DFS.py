@@ -1,23 +1,25 @@
 from .Searcher import Searcher
+from queue import LifoQueue
 
 
 class DFS(Searcher):
     def __init__(self):
         super().__init__()
-        self.frontier = []
+        self.__frontier = LifoQueue()
+        self.__visited = set()
 
-    def search(self, state):
-        self.frontier.append(state)
-        while len(self.frontier) > 0:
-            state = self.frontier.pop()
-            if state.grid in self.visited:
-                continue
-            else:
-                self.visited.append(state.grid)
+    def search(self, initialState):
+        self.__frontier.put(initialState)
 
-            if self.goalTest(state):
+        while not self.__frontier.empty():
+            state = self.__frontier.get()
+
+            if super().goal_test(state):
                 return state
-            for neighbour in state.get_successor():
-                if neighbour.grid not in self.visited:
-                    self.frontier.append(neighbour)
-        return False
+
+            for neighbor in state.get_successor():
+                grid_hash = neighbor.get_hash()
+                if grid_hash not in self.__visited:
+                    self.__visited.add(grid_hash)
+                    self.__frontier.put(neighbor)
+        return None

@@ -9,7 +9,7 @@ class Searcher(abc.ABC):
     def search(self, state):
         return None
 
-    def goalTest(self, state):
+    def goal_test(self, state):
         return state.grid == [
             [0, 1, 2],
             [3, 4, 5],

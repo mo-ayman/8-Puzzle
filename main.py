@@ -1,4 +1,4 @@
-from AI import State, GUI, DFS
+from AI import State, GUI, DFS, BFS
 
 initial_state = State()
 

@@ -39,3 +39,7 @@ class State(object):
 
         return successors
 
+    def get_hash(self):
+        return hash(tuple(self.grid[0] + self.grid[1] + self.grid[2]))
+
+

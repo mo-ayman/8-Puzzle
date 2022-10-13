@@ -1,4 +1,4 @@
-from Searcher import Searcher
+from .Searcher import Searcher
 
 
 class DFS(Searcher):
@@ -10,12 +10,14 @@ class DFS(Searcher):
         self.frontier.append(state)
         while len(self.frontier) > 0:
             state = self.frontier.pop()
-            if state not in self.visited:
-                self.visited.append(state)
+            if state.grid in self.visited:
+                continue
+            else:
+                self.visited.append(state.grid)
 
             if self.goalTest(state):
                 return state
             for neighbour in state.get_successor():
-                if neighbour not in self.frontier and neighbour not in self.visited:
+                if neighbour.grid not in self.visited:
                     self.frontier.append(neighbour)
         return False

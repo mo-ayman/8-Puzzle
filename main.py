@@ -1,4 +1,4 @@
-from AI import State, GUI
+from AI import State, GUI, DFS
 
 initial_state = State()
 
@@ -13,5 +13,9 @@ def take_input():
 
 
 take_input()
-GUI = GUI(initial_state.get_successor()[0].get_successor()[0])
+
+DFS_search = DFS()
+finishing_state = DFS_search.search(initial_state)
+
+GUI = GUI(finishing_state)
 GUI.run()

@@ -1,4 +1,4 @@
-from AI import State, GUI
+from AI import State, GUI, DFS, BFS
 
 initial_state = State()
 
@@ -12,6 +12,10 @@ def take_input():
     search_algo = input()
 
 
-take_input()
-GUI = GUI(initial_state.get_successor()[0].get_successor()[0])
+
+BFS_search = BFS()
+DFS_search = DFS()
+finishing_state = BFS_search.search(initial_state)
+print(finishing_state[1].grid)
+GUI = GUI(finishing_state[1])
 GUI.run()

@@ -6,12 +6,12 @@ from AI import State
 
 
 class GUI(object):
-    def __init__(self, initial_state: State):
+    def __init__(self, finishing_state: State):
         pygame.init()
         self.actual_position = None
         self.expected_position = None
         self.screen = None
-        self.initial_state = initial_state
+        self.finishing_state = finishing_state
         self.font = pygame.font.SysFont('arial', 32)
 
     def print_grid(self, grid):
@@ -35,27 +35,29 @@ class GUI(object):
             self.screen.fill((255, 255, 255))
 
             if actual_x < target_x:
-                actual_x += 0.1
+                actual_x += 1
                 if actual_x > target_x:
                     actual_x = target_x
 
             elif actual_x > target_x:
-                actual_x -= 0.1
+                actual_x -= 1
                 if actual_x < target_x:
                     actual_x = target_x
 
             if actual_y < target_y:
-                actual_y += 0.1
+                actual_y += 1
                 if actual_y > target_y:
                     actual_y = target_y
 
             elif actual_y > target_y:
-                actual_y -= 0.1
+                actual_y -= 1
                 if actual_y < target_y:
                     actual_y = target_y
 
             self.actual_position[x1][y1] = (actual_x, actual_y)
             self.print_grid(current_state.grid)
+
+        self.actual_position = deepcopy(self.expected_position)
 
     def run(self):
         icon = pygame.image.load("ai.png")
@@ -74,15 +76,19 @@ class GUI(object):
 
         self.actual_position = deepcopy(self.expected_position)
 
-        while True:
-            print(self.initial_state)
-            if self.initial_state.previous_state is None:
-                break
-            self.transition(self.initial_state, self.initial_state.previous_state)
-            self.initial_state = self.initial_state.previous_state
+        states = [self.finishing_state]
+        current_state = self.finishing_state
+        while current_state.previous_state is not None:
+            states.append(current_state.previous_state)
+            current_state = current_state.previous_state
+        states.reverse()
+
+        for i in range(len(states) - 1):
+            self.transition(states[i], states[i + 1])
 
         running: bool = True
         while running:
+            pygame.display.update()
             events = pygame.event.get()
             for event in events:
                 print(event)

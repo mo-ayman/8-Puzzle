@@ -2,7 +2,7 @@ import abc
 class Heuristic(object):
 
     @abc.abstractmethod
-    def estimateCost(self, curri,currj,number):
+    def heuristicCost(self, curri,currj,number):
         return 0
 
 

@@ -21,5 +21,5 @@ class BFS(Searcher):
                 grid_hash = neighbor.get_hash()
                 if grid_hash not in self.__visited:
                     self.__visited.add(grid_hash)
-                self.__frontier.put(neighbor)
+                    self.__frontier.put(neighbor)
         return None

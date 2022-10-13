@@ -1,4 +1,5 @@
-from AI import State, GUI, DFS, BFS
+from AI import State, GUI
+from AI.SearchFactory import SearchFactory
 
 initial_state = State()
 
@@ -10,12 +11,12 @@ def take_input():
 
     print("Enter the search algorithm")
     search_algo = input()
+    return search_algo
 
 
-take_input()
-
-DFS_search = DFS()
-finishing_state = DFS_search.search(initial_state)
+search_algo=take_input()
+searcher=SearchFactory.get_search_algo(search_algo)
+finishing_state=searcher.search(initial_state)
 
 GUI = GUI(finishing_state)
 GUI.run()

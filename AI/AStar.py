@@ -1,4 +1,4 @@
-import Searcher
+from .Searcher import Searcher
 
 
 class AStar(Searcher):

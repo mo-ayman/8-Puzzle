@@ -35,27 +35,29 @@ class GUI(object):
             self.screen.fill((255, 255, 255))
 
             if actual_x < target_x:
-                actual_x += 0.2
+                actual_x += 1
                 if actual_x > target_x:
                     actual_x = target_x
 
             elif actual_x > target_x:
-                actual_x -= 0.2
+                actual_x -= 1
                 if actual_x < target_x:
                     actual_x = target_x
 
             if actual_y < target_y:
-                actual_y += 0.2
+                actual_y += 1
                 if actual_y > target_y:
                     actual_y = target_y
 
             elif actual_y > target_y:
-                actual_y -= 0.2
+                actual_y -= 1
                 if actual_y < target_y:
                     actual_y = target_y
 
             self.actual_position[x1][y1] = (actual_x, actual_y)
             self.print_grid(current_state.grid)
+
+        self.actual_position = deepcopy(self.expected_position)
 
     def run(self):
         icon = pygame.image.load("ai.png")

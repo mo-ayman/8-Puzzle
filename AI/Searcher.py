@@ -3,7 +3,7 @@ import abc
 
 class Searcher(abc.ABC):
     def __init__(self):
-        self.visited = []
+        self.visited = set()
 
     @abc.abstractmethod
     def search(self, state):

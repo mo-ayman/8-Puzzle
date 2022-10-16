@@ -9,7 +9,7 @@ def take_input():
     for i in range(3):
         initial_state.grid[i][0], initial_state.grid[i][1], initial_state.grid[i][2] = map(int, input().split())
 
-    print("Enter the search algorithm")
+    print("Enter the number corresponding to search algorithm:\n1.DFS\n2.BFS\n3.AStar Euclidean\n4.AStar Manhattan")
     search_algo = input()
     return search_algo
 

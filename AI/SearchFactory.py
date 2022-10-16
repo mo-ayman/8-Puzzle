@@ -9,9 +9,9 @@ class SearchFactory:
             search = DFS()
         elif search_algo == 'BFS':
             search = BFS()
-        elif search_algo == 'AStar Euclidean':
+        elif search_algo == 'A* Euclidean':
             search = AStar(EuclideanHeuristic())
-        elif search_algo == 'AStar Manhattan':
+        elif search_algo == 'A* Manhattan':
             search = AStar(ManhattanHeuristic())
         return search
 

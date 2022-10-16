@@ -11,7 +11,7 @@ class AStar(Searcher):
     def search(self, initialState):
         stateExplored=1
         self.__frontier.put((self.__heuristic.heuristic_cost(initialState)+initialState.previous_cost,stateExplored,initialState))
-
+        self.__visited.add(initialState.get_hash());
         while not self.__frontier.empty():
             state = self.__frontier.get()[2]
 

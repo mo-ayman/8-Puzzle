@@ -1,4 +1,5 @@
 from AI import DFS,BFS,AStar,EuclideanHeuristic , ManhattanHeuristic
+from AI.NaiveHeuristic import NaiveHeuristic
 
 
 class SearchFactory:
@@ -12,5 +13,7 @@ class SearchFactory:
             search = AStar(EuclideanHeuristic())
         elif search_algo == '4':
             search = AStar(ManhattanHeuristic())
+        elif search_algo == '5':
+            search = AStar(NaiveHeuristic())
         return search
 

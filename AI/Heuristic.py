@@ -5,7 +5,8 @@ class Heuristic(object):
         cost = 0
         for curri in range(3):
             for currj in range(3):
-                cost += self.heuristicCostCell(curri,currj,state.grid[curri][currj])
+                if state.grid[curri][currj]!=0 :
+                    cost += self.heuristicCostCell(curri,currj,state.grid[curri][currj])
         return cost
 
     @abc.abstractmethod

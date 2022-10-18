@@ -1,6 +1,5 @@
 from .Searcher import Searcher
 from queue import PriorityQueue
-from .Heuristic import Heuristic
 class AStar(Searcher):
     def __init__(self,Heuristic):
         super().__init__()

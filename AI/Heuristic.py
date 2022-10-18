@@ -3,10 +3,11 @@ class Heuristic(object):
 
     def heuristic_cost(self,state):
         cost = 0
+        grid=state.get_grid()
         for curri in range(3):
             for currj in range(3):
-                if state.grid[curri][currj]!=0 :
-                    cost += self.heuristicCostCell(curri,currj,state.grid[curri][currj])
+                if grid[curri][currj]!=0 :
+                    cost += self.heuristicCostCell(curri,currj,grid[curri][currj])
         return cost
 
     @abc.abstractmethod

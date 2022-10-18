@@ -55,7 +55,7 @@ class GUI(object):
                     actual_y = target_y
 
             self.actual_position[x1][y1] = (actual_x, actual_y)
-            self.print_grid(current_state.grid)
+            self.print_grid(current_state.get_grid())
 
         self.actual_position = deepcopy(self.expected_position)
 

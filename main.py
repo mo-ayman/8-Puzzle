@@ -10,7 +10,12 @@ def take_input():
     for i in range(3):
         grid[i][0], grid[i][1], grid[i][2] = map(int, input().split())
     initial_state.set_grid(grid)
-    print("Enter the number corresponding to search algorithm:\n1.DFS\n2.BFS\n3.AStar Euclidean\n4.AStar Manhattan\n5.Naive Heuristic")
+    print("Enter the number corresponding to search algorithm:\n"
+          "1.DFS\n"
+          "2.BFS\n"
+          "3.AStar Euclidean\n"
+          "4.AStar Manhattan\n"
+          "5.Naive Heuristic")
     search_algo = input()
     return search_algo
 

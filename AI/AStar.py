@@ -1,5 +1,7 @@
 from .Searcher import Searcher
 from queue import PriorityQueue
+
+
 class AStar(Searcher):
     def __init__(self,Heuristic):
         super().__init__()
@@ -8,19 +10,19 @@ class AStar(Searcher):
         self.__heuristic = Heuristic
 
     def search(self, initialState):
-        stateExplored=1
+        explored_states = 0
         self.__frontier.put((self.__heuristic.heuristic_cost(initialState)+initialState.previous_cost,stateExplored,initialState))
         while not self.__frontier.empty():
             state = self.__frontier.get()[2]
+            explored_states += 1
 
-            self.__visited.add(state.get_hash());
+            self.__visited.add(state.get_hash())
             if super().goal_test(state):
-                return state
+                return state, explored_states
 
             for neighbor in state.get_successor():
                 grid_hash = neighbor.get_hash()
                 if grid_hash not in self.__visited:
-                    stateExplored+=1
                     self.__frontier.put((self.__heuristic.heuristic_cost(neighbor)+neighbor.previous_cost,stateExplored,neighbor))
                 else:
                     pass

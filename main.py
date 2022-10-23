@@ -1,5 +1,6 @@
 from AI import State, GUI
 from AI.SearchFactory import SearchFactory
+import time
 
 initial_state = State()
 
@@ -16,13 +17,17 @@ def take_input():
           "3.AStar Euclidean\n"
           "4.AStar Manhattan\n"
           "5.Naive Heuristic")
-    search_algo = input()
-    return search_algo
+    algo = input()
+    return algo
 
 
-search_algo=take_input()
-searcher=SearchFactory.get_search_algo(search_algo)
-finishing_state=searcher.search(initial_state)
+search_algo = take_input()
+searcher = SearchFactory.get_search_algo(search_algo)
+start_time = time.time()
+finishing_state, nodes_expanded = searcher.search(initial_state)
+end_time = time.time()
+time_taken = end_time - start_time
+print(time_taken * 1000)
 
-GUI = GUI(finishing_state)
+GUI = GUI(finishing_state, nodes_expanded, time_taken)
 GUI.run()

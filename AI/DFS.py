@@ -11,11 +11,13 @@ class DFS(Searcher):
         self.__frontier.put(initialState)
         self.visited.add(initialState.get_hash())
 
+        explored_states = 0
         while not self.__frontier.empty():
             state = self.__frontier.get()
+            explored_states += 1
 
             if super().goal_test(state):
-                return state
+                return state, explored_states
 
             for neighbor in state.get_successor():
                 grid_hash = neighbor.get_hash()

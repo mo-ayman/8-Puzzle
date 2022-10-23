@@ -14,6 +14,6 @@ class Heuristic(object):
     def heuristicCostCell(self, curri,currj,number):
         pass
     def getGoalPosition(self,number):
-        i=number % 3
-        j=number-3*i
-        return i,j
+        i = number // 3
+        j = number % 3
+        return i, j

@@ -24,9 +24,10 @@ class GUI(object):
         self.search_depth_label = self.labels_font.render("Goal Depth: ", True, (0, 0, 0))
         self.running_time_label = self.labels_font.render("Time Taken: " + str(time_taken), True, (0, 0, 0))
 
-    def print_buttons(self):
-        pygame.draw.rect(self.screen, (0, 0, 0), self.next_button, 1)
-        self.screen.blit(self.next_label, (20, self.height - 50))
+    def print_buttons(self, in_transit: bool = False):
+        if not in_transit:
+            pygame.draw.rect(self.screen, (0, 0, 0), self.next_button, 1)
+            self.screen.blit(self.next_label, (20, self.height - 50))
         self.screen.blit(self.cost_label, (150, self.height - 50))
         self.screen.blit(self.nodes_expanded_label, (300, self.height - 50))
         self.screen.blit(self.search_depth_label, (500, self.height - 50))
@@ -51,6 +52,7 @@ class GUI(object):
         target_y = self.expected_position[x2][y2][1]
         while actual_x != target_x or actual_y != target_y:
             self.screen.fill((255, 255, 255))
+            self.print_buttons(in_transit=True)
 
             if actual_x < target_x:
                 actual_x += 1
@@ -74,8 +76,9 @@ class GUI(object):
 
             self.actual_position[x1][y1] = (actual_x, actual_y)
             self.print_grid(current_state.get_grid())
-            self.print_buttons()
 
+        self.print_buttons(in_transit=False)
+        pygame.display.update()
         self.actual_position = deepcopy(self.expected_position)
 
     def run(self):

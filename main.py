@@ -26,8 +26,8 @@ searcher = SearchFactory.get_search_algo(search_algo)
 start_time = time.time()
 finishing_state, nodes_expanded = searcher.search(initial_state)
 end_time = time.time()
-time_taken = end_time - start_time
-print(time_taken * 1000)
+time_taken = 1000 * (end_time - start_time)
+print(time_taken)
 
 GUI = GUI(finishing_state, nodes_expanded, time_taken)
 GUI.run()

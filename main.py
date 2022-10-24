@@ -1,24 +1,26 @@
 from AI import State, GUI
 from AI.SearchFactory import SearchFactory
 import time
+import easygui
 
 initial_state = State()
 
 
 def take_input():
-    print("Enter the initial state of the grid")
-    grid = [[0] * 3 for _ in range(3)]
-    for i in range(3):
-        grid[i][0], grid[i][1], grid[i][2] = map(int, input().split())
+    inp = easygui.enterbox("Enter the initial state of the grid", "Initial State", "[0, 1, 2, 3, 4, 5, 6, 7, 8]")
+
+    grid_1d = eval(inp)
+    grid = [[0, 1, 2], [3, 4, 5], [6, 7, 8]]
+
+    for i in range(9):
+        grid[i // 3][i % 3] = grid_1d[i]
+
     initial_state.set_grid(grid)
-    print("Enter the number corresponding to search algorithm:\n"
-          "1.DFS\n"
-          "2.BFS\n"
-          "3.AStar Euclidean\n"
-          "4.AStar Manhattan\n"
-          "5.Naive Heuristic")
-    algo = input()
-    return algo
+
+    algorithm = easygui.buttonbox("Select the search algorithm", "Searcher Selector",
+                      ["DFS", "BFS", "A* Euclidean", "A* Manhattan", "A* Naive"])
+
+    return algorithm
 
 
 search_algo = take_input()

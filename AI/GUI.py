@@ -115,7 +115,7 @@ class GUI(object):
             for event in events:
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     x, y = event.pos
-                    if self.next_button.collidepoint(x, y):
+                    if self.next_button.collidepoint(x, y) and state_index + 1 != len(states):
                         self.transition(states[state_index], states[state_index + 1])
                         state_index += 1
                 if event.type == pygame.QUIT:

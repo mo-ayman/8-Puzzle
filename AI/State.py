@@ -7,6 +7,7 @@ class State(object):
         self.previous_state = None
         self.previous_cost = 0
         self.grid_int= 0
+        self.depth = 0
 
     def find_empty(self):
         grid=self.get_grid()
@@ -44,6 +45,7 @@ class State(object):
         grid[x2][y2]=temp
         new_state.set_grid(grid)
         new_state.previous_cost = self.previous_cost + 1
+        new_state.depth = self.depth + 1
 
         return new_state
 

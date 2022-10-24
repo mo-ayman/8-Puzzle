@@ -6,7 +6,7 @@ from AI import State
 
 
 class GUI(object):
-    def __init__(self, finishing_state: State, nodes_expanded: int, time_taken):
+    def __init__(self, finishing_state: State, nodes_expanded: int, time_taken, max_depth):
         pygame.init()
         self.actual_position = None
         self.expected_position = None
@@ -21,7 +21,7 @@ class GUI(object):
         self.next_label = self.labels_font.render("Next Step", True, (0, 0, 0))
         self.cost_label = self.labels_font.render("Path Cost: " + str(self.finishing_state.previous_cost), True, (0, 0, 0))
         self.nodes_expanded_label = self.labels_font.render("Nodes Expanded: " + str(self.nodes_expanded), True, (0, 0, 0))
-        self.search_depth_label = self.labels_font.render("Goal Depth: ", True, (0, 0, 0))
+        self.search_depth_label = self.labels_font.render("Max Depth: " + str(max_depth), True, (0, 0, 0))
         self.running_time_label = self.labels_font.render("Time Taken: " + str(time_taken), True, (0, 0, 0))
 
     def print_buttons(self, in_transit: bool = False):
@@ -102,7 +102,6 @@ class GUI(object):
             states.append(current_state.previous_state)
             current_state = current_state.previous_state
         states.reverse()
-        self.search_depth_label = self.labels_font.render("Goal Depth: " + str(len(states)), True, (0, 0, 0))
 
         self.print_grid(states[0].get_grid())
         self.print_buttons()

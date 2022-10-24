@@ -27,7 +27,7 @@ def take_input():
 search_algo = take_input()
 searcher = SearchFactory.get_search_algo(search_algo)
 start_time = time.time()
-finishing_state, nodes_expanded = searcher.search(initial_state)
+finishing_state, nodes_expanded, max_depth = searcher.search(initial_state)
 end_time = time.time()
 time_taken = 1000 * (end_time - start_time)
 
@@ -35,5 +35,5 @@ if finishing_state is None:
     easygui.msgbox("This case is unsolvable!\nTime taken: " + str(time_taken) + " milliseconds", "Alert")
     sys.exit(0)
 
-GUI = GUI(finishing_state, nodes_expanded, time_taken)
+GUI = GUI(finishing_state, nodes_expanded, time_taken, max_depth)
 GUI.run()

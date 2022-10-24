@@ -3,6 +3,8 @@ from queue import PriorityQueue
 
 
 class AStar(Searcher):
+    """A* Class implementing the Searcher interface"""
+
     def __init__(self, Heuristic):
         super().__init__()
         self.__frontier = PriorityQueue()
@@ -10,6 +12,8 @@ class AStar(Searcher):
         self.__heuristic = Heuristic
 
     def search(self, initialState):
+        """Implementation of the search algorithm according to pseudocode"""
+
         max_depth = 0
         explored_states = 0
         self.__frontier.put(
@@ -43,4 +47,4 @@ class AStar(Searcher):
                     )
                 else:
                     pass
-        return None, None, None
+        return None, None, None     # Return None in case of failure to find a solution

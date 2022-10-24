@@ -2,7 +2,11 @@ import abc
 
 
 class Heuristic(object):
+    """Interface for any Heuristic algorithm to be used in the A* Search"""
+
     def heuristic_cost(self, state):
+        """Computes the heuristic value for the whole state using the heuristic value for each cell"""
+
         cost = 0
         grid = state.get_grid()
         for curri in range(3):

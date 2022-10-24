@@ -2,6 +2,8 @@ import abc
 
 
 class Searcher(abc.ABC):
+    """Interface for any Search algorithm"""
+
     def __init__(self):
         self.visited = set()
         self.__state_counter = 0
@@ -11,6 +13,8 @@ class Searcher(abc.ABC):
         return None
 
     def print_state(self, state, should_print: bool = False):
+        """Print all expanded states to the console if should_print is True"""
+
         if should_print:
             self.__state_counter += 1
             print("State #" + str(self.__state_counter))

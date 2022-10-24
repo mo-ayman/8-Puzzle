@@ -3,6 +3,8 @@ from AI.NaiveHeuristic import NaiveHeuristic
 
 
 class SearchFactory:
+    """A factory for Searchers, returned according to user input"""
+
     @staticmethod
     def get_search_algo(search_algo):
         if search_algo == "1" or search_algo == "DFS":

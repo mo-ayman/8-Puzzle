@@ -3,11 +3,15 @@ from queue import Queue
 
 
 class BFS(Searcher):
+    """BFS Class implementing the Searcher interface"""
+
     def __init__(self):
         super().__init__()
         self.__frontier = Queue()
 
     def search(self, initialState):
+        """Implementation of the search algorithm according to pseudocode"""
+
         self.__frontier.put(initialState)
         self.visited.add(initialState.get_hash())
 
@@ -27,4 +31,4 @@ class BFS(Searcher):
                 if grid_hash not in self.visited:
                     self.visited.add(grid_hash)
                     self.__frontier.put(neighbor)
-        return None, None, None
+        return None, None, None     # Return None in case of failure to find a solution

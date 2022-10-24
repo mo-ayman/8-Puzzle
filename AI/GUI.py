@@ -28,8 +28,8 @@ class GUI(object):
         if not in_transit:
             pygame.draw.rect(self.screen, (0, 0, 0), self.next_button, 1)
             self.screen.blit(self.next_label, (20, self.height - 50))
-        self.screen.blit(self.cost_label, (150, self.height - 50))
-        self.screen.blit(self.nodes_expanded_label, (300, self.height - 50))
+        self.screen.blit(self.cost_label, (130, self.height - 50))
+        self.screen.blit(self.nodes_expanded_label, (280, self.height - 50))
         self.screen.blit(self.search_depth_label, (500, self.height - 50))
         self.screen.blit(self.running_time_label, (650, self.height - 50))
 

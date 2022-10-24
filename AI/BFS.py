@@ -14,6 +14,7 @@ class BFS(Searcher):
         explored_states = 0
         while not self.__frontier.empty():
             state = self.__frontier.get()
+            self.print_state(state)
             explored_states += 1
 
             if super().goal_test(state):
@@ -24,4 +25,4 @@ class BFS(Searcher):
                 if grid_hash not in self.visited:
                     self.visited.add(grid_hash)
                     self.__frontier.put(neighbor)
-        return None
+        return None, None

@@ -2,6 +2,7 @@ from AI import State, GUI
 from AI.SearchFactory import SearchFactory
 import time
 import easygui
+import sys
 
 initial_state = State()
 
@@ -29,7 +30,10 @@ start_time = time.time()
 finishing_state, nodes_expanded = searcher.search(initial_state)
 end_time = time.time()
 time_taken = 1000 * (end_time - start_time)
-print(time_taken)
+
+if finishing_state is None:
+    easygui.msgbox("This case is unsolvable!\nTime taken: " + str(time_taken) + " milliseconds", "Alert")
+    sys.exit(0)
 
 GUI = GUI(finishing_state, nodes_expanded, time_taken)
 GUI.run()

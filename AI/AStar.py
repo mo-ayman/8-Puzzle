@@ -16,11 +16,12 @@ class AStar(Searcher):
 
         max_depth = 0
         explored_states = 0
+        uniqueIdentifier = 0
         self.__frontier.put(
             (
                 self.__heuristic.heuristic_cost(initialState)
                 + initialState.previous_cost,
-                explored_states,
+                uniqueIdentifier,
                 initialState,
             )
         )
@@ -37,11 +38,12 @@ class AStar(Searcher):
             for neighbor in state.get_successor():
                 grid_hash = neighbor.get_hash()
                 if grid_hash not in self.__visited:
+                    uniqueIdentifier+=1
                     self.__frontier.put(
                         (
                             self.__heuristic.heuristic_cost(neighbor)
                             + neighbor.previous_cost,
-                            explored_states,
+                            uniqueIdentifier,
                             neighbor,
                         )
                     )

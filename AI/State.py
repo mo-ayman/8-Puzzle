@@ -72,6 +72,6 @@ class State(object):
 
         return successors
 
-    def get_hash(self):     # Used in inserting states into sets
+    def get_hash(self):  # Used in inserting states into sets
         grid = self.get_grid()
         return hash(tuple(grid[0] + grid[1] + grid[2]))

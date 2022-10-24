@@ -9,7 +9,7 @@ class GUI(object):
     """This class handles the all the functionality of GUI of the grid table only"""
 
     def __init__(
-            self, finishing_state: State, nodes_expanded: int, time_taken, max_depth
+        self, finishing_state: State, nodes_expanded: int, time_taken, max_depth
     ):
         pygame.init()  # REQUIRED for pygame setup, nothing will work without it
         self.actual_position = None
@@ -58,8 +58,12 @@ class GUI(object):
             for j in range(3):
                 if grid[i][j] == 0:  # The empty cell should not be printed
                     continue
-                surface = self.font.render(str(grid[i][j]), True, (0, 0, 0))    # Add cell number to a surface
-                self.screen.blit(surface, self.actual_position[i][j])           # Add the surface to the screen
+                surface = self.font.render(
+                    str(grid[i][j]), True, (0, 0, 0)
+                )  # Add cell number to a surface
+                self.screen.blit(
+                    surface, self.actual_position[i][j]
+                )  # Add the surface to the screen
         pygame.display.update()
 
     def transition(self, current_state: State, target_state: State):
@@ -133,7 +137,9 @@ class GUI(object):
             ],
         ]
 
-        self.actual_position = deepcopy(self.expected_position)     # A copy of positions to be used in transition
+        self.actual_position = deepcopy(
+            self.expected_position
+        )  # A copy of positions to be used in transition
 
         # Make the list of states from finish to start and reverse it
         states = [self.finishing_state]
@@ -156,7 +162,7 @@ class GUI(object):
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     x, y = event.pos
                     if self.next_button.collidepoint(x, y) and state_index + 1 != len(
-                            states
+                        states
                     ):  # Next Step button is clicked
                         self.transition(states[state_index], states[state_index + 1])
                         state_index += 1

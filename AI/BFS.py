@@ -31,4 +31,4 @@ class BFS(Searcher):
                 if grid_hash not in self.visited:
                     self.visited.add(grid_hash)
                     self.__frontier.put(neighbor)
-        return None, None, None     # Return None in case of failure to find a solution
+        return None, None, None  # Return None in case of failure to find a solution

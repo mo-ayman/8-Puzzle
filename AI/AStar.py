@@ -47,4 +47,4 @@ class AStar(Searcher):
                     )
                 else:
                     pass
-        return None, None, None     # Return None in case of failure to find a solution
+        return None, None, None  # Return None in case of failure to find a solution

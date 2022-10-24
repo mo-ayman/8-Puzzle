@@ -28,6 +28,8 @@ class DFS(Searcher):
                     self.visited.add(grid_hash)
                     self.__frontier.put(neighbor)
         return None, None, None
+
+
 """
 6 7 8
 3 2 1

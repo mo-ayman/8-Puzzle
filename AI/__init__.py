@@ -1,4 +1,14 @@
-__all__ = ["Searcher", "DFS", "BFS", "ManhattanHeuristic", "AStar", "EuclideanHeuristic", "GUI", "Heuristic", "State"]
+__all__ = [
+    "Searcher",
+    "DFS",
+    "BFS",
+    "ManhattanHeuristic",
+    "AStar",
+    "EuclideanHeuristic",
+    "GUI",
+    "Heuristic",
+    "State",
+]
 
 from .Searcher import Searcher
 from .DFS import DFS

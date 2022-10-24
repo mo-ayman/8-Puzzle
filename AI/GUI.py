@@ -6,23 +6,33 @@ from AI import State
 
 
 class GUI(object):
-    def __init__(self, finishing_state: State, nodes_expanded: int, time_taken, max_depth):
+    def __init__(
+        self, finishing_state: State, nodes_expanded: int, time_taken, max_depth
+    ):
         pygame.init()
         self.actual_position = None
         self.expected_position = None
         self.screen = None
         self.finishing_state = finishing_state
         self.nodes_expanded = nodes_expanded
-        self.font = pygame.font.SysFont('arial', 32)
-        self.labels_font = pygame.font.SysFont('arial', 24)
+        self.font = pygame.font.SysFont("arial", 32)
+        self.labels_font = pygame.font.SysFont("arial", 24)
         self.width = 800
         self.height = 600
         self.next_button = pygame.Rect(15, self.height - 50, 90, 40)
         self.next_label = self.labels_font.render("Next Step", True, (0, 0, 0))
-        self.cost_label = self.labels_font.render("Path Cost: " + str(self.finishing_state.previous_cost), True, (0, 0, 0))
-        self.nodes_expanded_label = self.labels_font.render("Nodes Expanded: " + str(self.nodes_expanded), True, (0, 0, 0))
-        self.search_depth_label = self.labels_font.render("Max Depth: " + str(max_depth), True, (0, 0, 0))
-        self.running_time_label = self.labels_font.render("Time Taken: " + str(time_taken), True, (0, 0, 0))
+        self.cost_label = self.labels_font.render(
+            "Path Cost: " + str(self.finishing_state.previous_cost), True, (0, 0, 0)
+        )
+        self.nodes_expanded_label = self.labels_font.render(
+            "Nodes Expanded: " + str(self.nodes_expanded), True, (0, 0, 0)
+        )
+        self.search_depth_label = self.labels_font.render(
+            "Max Depth: " + str(max_depth), True, (0, 0, 0)
+        )
+        self.running_time_label = self.labels_font.render(
+            "Time Taken: " + str(time_taken), True, (0, 0, 0)
+        )
 
     def print_buttons(self, in_transit: bool = False):
         if not in_transit:
@@ -89,10 +99,23 @@ class GUI(object):
         self.screen.fill((255, 255, 255))
         pygame.display.update()
 
-        self.expected_position = [[(self.width / 6, self.height / 6), (self.width / 2, self.height / 6), (5 * self.width / 6, self.height / 6)],
-                                  [(self.width / 6, self.height / 2), (self.width / 2, self.height / 2), (5 * self.width / 6, self.height / 2)],
-                                  [(self.width / 6, 5 * self.height / 6), (self.width / 2, 5 * self.height / 6),
-                                   (5 * self.width / 6, 5 * self.height / 6)]]
+        self.expected_position = [
+            [
+                (self.width / 6, self.height / 6),
+                (self.width / 2, self.height / 6),
+                (5 * self.width / 6, self.height / 6),
+            ],
+            [
+                (self.width / 6, self.height / 2),
+                (self.width / 2, self.height / 2),
+                (5 * self.width / 6, self.height / 2),
+            ],
+            [
+                (self.width / 6, 5 * self.height / 6),
+                (self.width / 2, 5 * self.height / 6),
+                (5 * self.width / 6, 5 * self.height / 6),
+            ],
+        ]
 
         self.actual_position = deepcopy(self.expected_position)
 
@@ -114,7 +137,9 @@ class GUI(object):
             for event in events:
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     x, y = event.pos
-                    if self.next_button.collidepoint(x, y) and state_index + 1 != len(states):
+                    if self.next_button.collidepoint(x, y) and state_index + 1 != len(
+                        states
+                    ):
                         self.transition(states[state_index], states[state_index + 1])
                         state_index += 1
                 if event.type == pygame.QUIT:

@@ -8,7 +8,11 @@ initial_state = State()
 
 
 def take_input():
-    inp = easygui.enterbox("Enter the initial state of the grid", "Initial State", "[0, 1, 2, 3, 4, 5, 6, 7, 8]")
+    inp = easygui.enterbox(
+        "Enter the initial state of the grid",
+        "Initial State",
+        "[0, 1, 2, 3, 4, 5, 6, 7, 8]",
+    )
 
     grid_1d = eval(inp)
     grid = [[0, 1, 2], [3, 4, 5], [6, 7, 8]]
@@ -18,8 +22,11 @@ def take_input():
 
     initial_state.set_grid(grid)
 
-    algorithm = easygui.buttonbox("Select the search algorithm", "Searcher Selector",
-                      ["DFS", "BFS", "A* Euclidean", "A* Manhattan", "A* Naive"])
+    algorithm = easygui.buttonbox(
+        "Select the search algorithm",
+        "Searcher Selector",
+        ["DFS", "BFS", "A* Euclidean", "A* Manhattan", "A* Naive"],
+    )
 
     return algorithm
 
@@ -32,7 +39,10 @@ end_time = time.time()
 time_taken = 1000 * (end_time - start_time)
 
 if finishing_state is None:
-    easygui.msgbox("This case is unsolvable!\nTime taken: " + str(time_taken) + " milliseconds", "Alert")
+    easygui.msgbox(
+        "This case is unsolvable!\nTime taken: " + str(time_taken) + " milliseconds",
+        "Alert",
+    )
     sys.exit(0)
 
 GUI = GUI(finishing_state, nodes_expanded, time_taken, max_depth)

@@ -14,7 +14,7 @@ class Searcher(abc.ABC):
     def search(self, state):
         return None
 
-    def print_state(self, state: State, should_print: bool = True) -> None:
+    def print_state(self, state: State, should_print: bool = False) -> None:
         """
         Print all expanded states to the console if should_print is True
 

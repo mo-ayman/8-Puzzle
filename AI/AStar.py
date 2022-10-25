@@ -9,14 +9,14 @@ class AStar(Searcher):
         super().__init__()
         self.__frontier = PriorityQueue()
         self.__visited = set()
-        self.__heuristic = Heuristic
+        self.__heuristic = Heuristic #inject heuristic class
 
     def search(self, initialState):
         """Implementation of the search algorithm according to pseudocode"""
 
-        max_depth = 0
+        max_depth = 0 #max depth of the tree
         explored_states = 0
-        uniqueIdentifier = 0
+        uniqueIdentifier = 0 #unique ID to tie break priority queue
         self.__frontier.put(
             (
                 self.__heuristic.heuristic_cost(initialState)

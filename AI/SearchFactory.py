@@ -1,4 +1,4 @@
-from AI import DFS, BFS, AStar, EuclideanHeuristic, ManhattanHeuristic
+from AI import DFS, BFS, AStar, EuclideanHeuristic, ManhattanHeuristic, Searcher
 from AI.NaiveHeuristic import NaiveHeuristic
 
 
@@ -6,7 +6,7 @@ class SearchFactory:
     """A factory for Searchers, returned according to user input"""
 
     @staticmethod
-    def get_search_algo(search_algo):
+    def get_search_algo(search_algo: str) -> Searcher:
         if search_algo == "1" or search_algo == "DFS":
             search = DFS()
         elif search_algo == "2" or search_algo == "BFS":

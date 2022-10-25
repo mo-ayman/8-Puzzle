@@ -10,7 +10,12 @@ class DFS(Searcher):
         self.__frontier = LifoQueue()
 
     def search(self, initialState):
-        """Implementation of the search algorithm according to pseudocode"""
+        """
+        Implementation of the search algorithm according to pseudocode
+
+        :param initialState: Initial state to search from
+        :return: tuple of (finishing state, number of explored states, max depth) or (None, None, None) in case of failure
+        """
 
         self.__frontier.put(initialState)
         self.visited.add(initialState.get_hash())
@@ -31,4 +36,5 @@ class DFS(Searcher):
                 if grid_hash not in self.visited:
                     self.visited.add(grid_hash)
                     self.__frontier.put(neighbor)
+
         return None, None, None  # Return None in case of failure to find a solution

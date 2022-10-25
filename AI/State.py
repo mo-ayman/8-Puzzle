@@ -1,4 +1,3 @@
-import math
 from copy import deepcopy
 
 
@@ -40,7 +39,7 @@ class State(object):
             for j in range(len(grid[i])):
                 self.grid_int = self.grid_int + grid[i][j] * (10 ** (8 - (i * 3 + j)))
 
-    def get_next_state(self, x1: int, y1: int, x2: int, y2: int):
+    def get_next_state(self, x1: int, y1: int, x2: int, y2: int) -> State:
         """Constructs the successor state given the position of the empty cell initially (x1, y1), and its position
         after movement to (x2, y2)"""
 

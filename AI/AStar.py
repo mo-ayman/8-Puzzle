@@ -12,7 +12,11 @@ class AStar(Searcher):
         self.__heuristic = Heuristic  # inject heuristic class
 
     def search(self, initialState):
-        """Implementation of the search algorithm according to pseudocode"""
+        """
+        Implementation of the search algorithm according to pseudocode
+        :param initialState: Initial state to search from
+        :return: tuple of (finishing state, number of explored states, max depth) or (None, None, None) in case of failure
+        """
 
         max_depth = 0  # max depth of the tree
         explored_states = 0

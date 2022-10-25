@@ -9,14 +9,14 @@ class AStar(Searcher):
         super().__init__()
         self.__frontier = PriorityQueue()
         self.__visited = set()
-        self.__heuristic = Heuristic #inject heuristic class
+        self.__heuristic = Heuristic  # inject heuristic class
 
     def search(self, initialState):
         """Implementation of the search algorithm according to pseudocode"""
 
-        max_depth = 0 #max depth of the tree
+        max_depth = 0  # max depth of the tree
         explored_states = 0
-        uniqueIdentifier = 0 #unique ID to tie break priority queue
+        uniqueIdentifier = 0  # unique ID to tie break priority queue
         self.__frontier.put(
             (
                 self.__heuristic.heuristic_cost(initialState)
@@ -27,6 +27,12 @@ class AStar(Searcher):
         )
         while not self.__frontier.empty():
             state = self.__frontier.get()[2]
+
+            # Check that current state is not already visited
+            current_grid_hash = state.get_hash()
+            if current_grid_hash in self.__visited:
+                continue
+
             self.print_state(state)
             explored_states += 1
             max_depth = max(max_depth, state.depth)
@@ -38,7 +44,7 @@ class AStar(Searcher):
             for neighbor in state.get_successor():
                 grid_hash = neighbor.get_hash()
                 if grid_hash not in self.__visited:
-                    uniqueIdentifier+=1
+                    uniqueIdentifier += 1
                     self.__frontier.put(
                         (
                             self.__heuristic.heuristic_cost(neighbor)
@@ -47,6 +53,5 @@ class AStar(Searcher):
                             neighbor,
                         )
                     )
-                else:
-                    pass
+
         return None, None, None  # Return None in case of failure to find a solution

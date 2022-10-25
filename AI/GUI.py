@@ -18,13 +18,18 @@ class GUI(object):
         self.finishing_state = finishing_state
         self.nodes_expanded = nodes_expanded
         self.font = pygame.font.SysFont("arial", 32)
-        self.labels_font = pygame.font.SysFont("arial", 24)
+        self.labels_font = pygame.font.SysFont("arial", 20)
         self.width = 800
         self.height = 600
 
         # Defining buttons and labels
-        self.next_button = pygame.Rect(15, self.height - 50, 90, 40)
-        self.next_label = self.labels_font.render("Next Step", True, (0, 0, 0))
+        self.prev_button = pygame.Rect(15, self.height - 50, 40, 40)
+        self.prev_label = self.labels_font.render("Prev", True, (0, 0, 0))
+        self.next_button = pygame.Rect(60, self.height - 50, 40, 40)
+        self.next_label = self.labels_font.render("Next", True, (0, 0, 0))
+        self.play_button = pygame.Rect(105, self.height - 50, 40, 40)
+        self.play_label = self.labels_font.render("Play", True, (0, 0, 0))
+
         self.cost_label = self.labels_font.render(
             "Path Cost: " + str(self.finishing_state.previous_cost), True, (0, 0, 0)
         )
@@ -35,7 +40,7 @@ class GUI(object):
             "Max Depth: " + str(max_depth), True, (0, 0, 0)
         )
         self.running_time_label = self.labels_font.render(
-            "Time Taken: " + str(time_taken), True, (0, 0, 0)
+            "Time Taken: " + str(int(time_taken)) + "ms", True, (0, 0, 0)
         )
 
     def print_buttons(self, in_transit: bool = False):
@@ -43,13 +48,17 @@ class GUI(object):
 
         # Disable the "Next Step" button while cells are moving
         if not in_transit:
+            pygame.draw.rect(self.screen, (0, 0, 0), self.prev_button, 1)
             pygame.draw.rect(self.screen, (0, 0, 0), self.next_button, 1)
-            self.screen.blit(self.next_label, (20, self.height - 50))
+            pygame.draw.rect(self.screen, (0, 0, 0), self.play_button, 1)
+            self.screen.blit(self.prev_label, (15, self.height - 50))
+            self.screen.blit(self.next_label, (60, self.height - 50))
+            self.screen.blit(self.play_label, (105, self.height - 50))
 
-        self.screen.blit(self.cost_label, (130, self.height - 50))
+        self.screen.blit(self.cost_label, (150, self.height - 50))
         self.screen.blit(self.nodes_expanded_label, (280, self.height - 50))
-        self.screen.blit(self.search_depth_label, (500, self.height - 50))
-        self.screen.blit(self.running_time_label, (650, self.height - 50))
+        self.screen.blit(self.search_depth_label, (480, self.height - 50))
+        self.screen.blit(self.running_time_label, (620, self.height - 50))
 
     def print_grid(self, grid):
         """Adds the cells to the screen and updates the display"""
@@ -161,10 +170,21 @@ class GUI(object):
             for event in events:
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     x, y = event.pos
+
+                    if self.prev_button.collidepoint(x, y) and state_index != 0:  # Next Step button is clicked
+                        self.transition(states[state_index], states[state_index - 1])
+                        state_index -= 1
+
                     if self.next_button.collidepoint(x, y) and state_index + 1 != len(
                         states
                     ):  # Next Step button is clicked
                         self.transition(states[state_index], states[state_index + 1])
                         state_index += 1
+
+                    if self.play_button.collidepoint(x, y):  # Next Step button is clicked
+                        while state_index != len(states) - 1:
+                            self.transition(states[state_index], states[state_index + 1])
+                            state_index += 1
+
                 if event.type == pygame.QUIT:
                     running = False
